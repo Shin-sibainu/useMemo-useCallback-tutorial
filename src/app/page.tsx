@@ -54,21 +54,32 @@ export default function Parent() {
   const doubledCount = useMemo(() => double(count), [count]);
 
   return (
-    <>
-      <p>親コンポーネントで文字を入力します。</p>
-      <input
-        type="text"
-        onChange={changeText}
-        className="border-2 border-slate-200 rounded-md"
-      />
-      <Child_1 /> {/* 子もレンダリングされてしまう。 */}
-      <Child_2 handleClick={handleClick} />　
-      {/* 関数の中身が同じでも、新しい関数として認識されてしまうから、usecallbackでメモ化してあげる。 */}
-      <p>親コンポーネント側での重い処理</p>
-      <p>
-        Counter: {count}, {doubledCount}
-      </p>
-      <button onClick={() => setCount(count + 1)}>Increment count2</button>
-    </>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="p-8 bg-white rounded-md shadow-lg">
+        <p className="text-lg mb-4">親コンポーネントで文字を入力します。</p>
+        <input
+          type="text"
+          onChange={changeText}
+          className="border-2 border-slate-200 rounded-md mb-4 w-64 p-2"
+        />
+        <div className="mb-4">
+          <Child_1 />
+        </div>
+        <div className="mb-4">
+          <Child_2 handleClick={handleClick} />
+        </div>
+        <p className="text-lg mb-4">親コンポーネント側での重い処理</p>
+        <p className="text-lg mb-4">
+          Counter: {count}, {doubledCount}
+        </p>
+        <button
+          onClick={() => setCount(count + 1)}
+          className="bg-blue-500 text-white p-2 rounded-md"
+        >
+          Increment count2
+        </button>
+      </div>
+    </div>
   );
+  
 }
